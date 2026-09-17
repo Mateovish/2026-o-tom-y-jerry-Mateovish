@@ -1,9 +1,78 @@
-import example.pepita
+import example.*
 
-describe "group of tests for pepita" {
+object quilombero {
+    method hacerQuilombo() {}
+    method velocidad () = 0
+}
+describe "prueba para los cuidadores"{ 
+  test "robocat siempre limpia toda la casa"{
+    robocat.limpiarCasa()
+    assert.equals(0, casa.suciedad())
+}
+  test "cuidador limpia la casa"{
+    const sucio = casa.suciedad()
+    const cuidador = casa.cuidador()
+    cuidador.limpiarCasa()
+    assert.that(sucio > casa.suciedad())
+}
 
-  test "pepita has initial energy" {
-    assert.equals(100, pepita.energy())
+
+  test "robocat siempre atrapa"{
+    assert.that(robocat.puedeAtrapar(quilombero))
   }
 
+  test "atrapa si es mas rapido" {
+    const velquil = quilombero.velocidad()
+    const velcuid = tom.velocidad()
+    assert.that(velcuid > velquil && tom.puedeAtrapar(quilombero))
+  }
+
+}
+
+describe "prueba paso del tiempo" {
+
+  test "al pasar el dia el cuidador limpia y trata de atrapar al quilombero" {
+    casa.pasarElDia()
+    assert.that(casa.suciedad() < 1000)
+  }
+
+  test "al pasar la noche el cuidador duerme y el quilombero hace quilombo" {
+    const sucio = casa.suciedad()
+    casa.pasarNoche()
+    assert.equals(sucio + 110, casa.suciedad())
+  }
+}
+
+describe "prueba de quilomberos" {
+
+  test "jerry ensucia la casa" {
+    const sucio = casa.suciedad()
+    jerry.hacerQuilombo()
+    assert.equals(sucio + 110, casa.suciedad())
+  }
+
+  test "jerry aumenta su peso al hacer quilombo" {
+    const pesoAnterior = jerry.peso()
+    jerry.hacerQuilombo()
+    assert.equals(pesoAnterior + 1, jerry.peso())
+  }
+
+  test "la velocidad de jerry depende de su peso" {
+    const peso = jerry.peso()
+    assert.equals(10 - peso, jerry.velocidad())
+  }
+
+  test "tuffy tiene velocidad 10" {
+    assert.equals(10, tuffy.velocidad())
+  }
+
+  test "mateo tiene velocidad 67" {
+    assert.equals(67, mateo.velocidad())
+  }
+
+  test "mateo aumenta su peso al hacer quilombo" {
+    const pesoAnterior = mateo.peso()
+    mateo.hacerQuilombo()
+    assert.equals(pesoAnterior + 5, mateo.peso())
+  }
 }
