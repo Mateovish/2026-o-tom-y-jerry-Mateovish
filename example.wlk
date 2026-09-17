@@ -2,6 +2,7 @@ object casa {
   var quilombero = jerry
   var cuidador = robocat
   var suciedad = 1000
+  method cuidador()=cuidador
   method suciedad () = suciedad
   method limpiar (cuanto) {
     suciedad -= cuanto
@@ -36,8 +37,16 @@ object tom {
   }
 }
 
+object nulo {
+    method hacerQuilombo() {}
+    method velocidad () = 0
+}
+
+
+
 object jerry {
   var peso = 1
+  method peso() = peso
   method hacerQuilombo() {
     casa.ensuciar(110)
     peso += 1
@@ -49,7 +58,7 @@ object tuffy {
   const velocidad = 10
   method velocidad () = velocidad
   method hacerQuilombo () {
-    casa.cuidador.interrumpirSuenio()
+    casa.interrumpirSuenio()
   }
 }
 
@@ -59,6 +68,8 @@ object robocat {
     casa.limpiar(sucieda)
   }
   method despertar () {}
+  method dormir() {  
+  }
   method puedeAtrapar (quilombero) = true
   }
 
@@ -84,10 +95,12 @@ object spike {
 object mateo {
   const velocidad = 67
   var peso = 67
+  method peso() = peso
   method hacerQuilombo(){
-     casa.cuidador.interrumpirSuenio()
+     casa.interrumpirSuenio()
      peso += 5
   }
+
   method velocidad () = velocidad
 }
 /* d*/
